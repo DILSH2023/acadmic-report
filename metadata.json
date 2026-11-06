@@ -1,0 +1,6 @@
+{
+  "name": "Academic Momentum",
+  "description": "Teacher workspace for tracking student performance, daily attendance logs, weighted grade books, and real-time behavioral insights.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
