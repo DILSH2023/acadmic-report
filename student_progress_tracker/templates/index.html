@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Progress Tracker — Academic Performance Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom py-3">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-dark" href="{{ url_for('index') }}">
+        <i class="bi bi-mortarboard-fill text-primary me-2"></i>Student Progress Tracker
+      </a>
+      <div class="d-flex gap-2">
+        <a href="{{ url_for('login') }}" class="btn btn-outline-dark btn-sm px-3 fw-semibold">Sign In</a>
+        <a href="{{ url_for('register') }}" class="btn btn-indigo btn-sm px-3">Student Registration</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="py-5">
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <p class="text-primary fw-bold mb-2">ACADEMIC PERFORMANCE MANAGEMENT SYSTEM</p>
+          <h1 class="display-5 fw-extrabold mb-3">
+            Track Attendance, Exam Marks, Assignments & Study Goals in One Place
+          </h1>
+          <p class="lead text-secondary mb-4">
+            A unified academic portal engineered for college students and faculty administrators to monitor subject-wise attendance, examination analytics, assignment milestones, and printable PDF progress reports.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="{{ url_for('login') }}" class="btn btn-indigo btn-lg px-4">
+              Launch Student / Admin Portal
+            </a>
+            <a href="{{ url_for('register') }}" class="btn btn-outline-secondary btn-lg px-4 fw-semibold">
+              Create Student Account
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="card-custom p-4">
+            <h5 class="fw-bold mb-3">Core System Modules</h5>
+            <div class="vstack gap-3">
+              <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-bar-chart-line-fill text-primary fs-4"></i>
+                <div>
+                  <div class="fw-bold">Interactive Student Dashboard</div>
+                  <small class="text-secondary">Real-time attendance, exam averages, and Chart.js visualizations.</small>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-calendar-check-fill text-success fs-4"></i>
+                <div>
+                  <div class="fw-bold">Attendance & Eligibility Calculation</div>
+                  <small class="text-secondary">Automatic 75% university attendance threshold monitoring per subject.</small>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-journal-check text-warning fs-4"></i>
+                <div>
+                  <div class="fw-bold">Assignment & Study Goal Tracker</div>
+                  <small class="text-secondary">Manage coursework submissions, daily/weekly study hours, and PDF reports.</small>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-shield-lock-fill text-danger fs-4"></i>
+                <div>
+                  <div class="fw-bold">Faculty Administrator Console</div>
+                  <small class="text-secondary">Manage students, subjects, attendance logs, and examination marks.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

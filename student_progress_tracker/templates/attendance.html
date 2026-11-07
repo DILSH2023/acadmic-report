@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attendance Management — Student Progress Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <aside class="sidebar-wrapper">
+    <a href="{{ url_for('dashboard') }}" class="sidebar-brand">
+      <i class="bi bi-mortarboard-fill text-primary me-2"></i>Progress Tracker
+    </a>
+    <nav class="nav flex-column sidebar-nav mt-3">
+      <a class="nav-link" href="{{ url_for('dashboard') }}"><i class="bi bi-grid-1x2-fill me-2"></i>Dashboard</a>
+      <a class="nav-link active" href="{{ url_for('attendance') }}"><i class="bi bi-calendar-check me-2"></i>Attendance</a>
+      <a class="nav-link" href="{{ url_for('performance') }}"><i class="bi bi-graph-up-arrow me-2"></i>Performance</a>
+      <a class="nav-link" href="{{ url_for('assignments') }}"><i class="bi bi-journal-text me-2"></i>Assignments</a>
+      <a class="nav-link" href="{{ url_for('goals') }}"><i class="bi bi-bullseye me-2"></i>Study Goals</a>
+      <a class="nav-link" href="{{ url_for('reports') }}"><i class="bi bi-file-earmark-pdf me-2"></i>Progress Report</a>
+      <a class="nav-link text-danger mt-4" href="{{ url_for('logout') }}"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h3 class="fw-bold mb-1">Attendance Management</h3>
+        <p class="text-secondary small mb-0">Subject-wise attendance logs and automatic 75% eligibility calculation</p>
+      </div>
+      <div class="stat-card py-2 px-3">
+        <span class="small text-secondary me-2">Overall Attendance:</span>
+        <strong class="fs-5 text-primary tabular-nums">{{ overall_attendance_pct }}%</strong>
+      </div>
+    </div>
+
+    <div class="card-custom p-4">
+      <div class="table-responsive">
+        <table class="table align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Subject Code</th>
+              <th>Subject Name</th>
+              <th>Instructor</th>
+              <th class="text-end">Classes Attended</th>
+              <th class="text-end">Classes Conducted</th>
+              <th class="text-end">Attendance %</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in attendance_rows %}
+              {% set pct = ((row.classes_attended / row.classes_conducted) * 100)|round(1) if row.classes_conducted > 0 else 0 %}
+              <tr>
+                <td class="fw-bold text-primary">{{ row.subject_code }}</td>
+                <td class="fw-semibold">{{ row.subject_name }}</td>
+                <td class="text-secondary small">{{ row.instructor }}</td>
+                <td class="text-end tabular-nums fw-semibold">{{ row.classes_attended }}</td>
+                <td class="text-end tabular-nums">{{ row.classes_conducted }}</td>
+                <td class="text-end tabular-nums fw-bold">{{ pct }}%</td>
+                <td>
+                  {% if pct >= 85 %}
+                    <span class="text-success fw-semibold small"><i class="bi bi-check-circle-fill me-1"></i>Excellent</span>
+                  {% elif pct >= 75 %}
+                    <span class="text-primary fw-semibold small"><i class="bi bi-check-circle me-1"></i>Eligible (Safe)</span>
+                  {% else %}
+                    <span class="text-danger fw-semibold small"><i class="bi bi-exclamation-triangle-fill me-1"></i>Shortage (&lt;75%)</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
